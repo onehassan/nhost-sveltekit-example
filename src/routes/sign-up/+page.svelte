@@ -33,7 +33,7 @@
 		error = signUpError;
 
 		if (!error) {
-			await goto('/protected');
+			await goto('/sign-in');
 		}
 	};
 </script>
