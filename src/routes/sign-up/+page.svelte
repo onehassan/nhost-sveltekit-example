@@ -5,7 +5,6 @@
 
 	export let data;
 	let { nhost } = data;
-	$: ({ nhost } = data);
 
 	/** @type {string}*/
 	let firstName;

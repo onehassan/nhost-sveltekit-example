@@ -1,7 +1,6 @@
 <script>
 	export let data;
 	let { session, nhost } = data;
-	$: ({ session } = data);
 
 	import { gql } from 'graphql-tag';
 

@@ -1,40 +1,32 @@
 <script>
-	import './styles.css';
-	import Navigation from '$lib/components/Navigation.svelte';
 	import { goto, invalidate } from '$app/navigation';
-	import { removeNhostSessionCookie, setNhostSessionInCookie } from '$lib/utils';
-	import { isBrowser } from '@nhost/nhost-js';
-	import jsCookie from 'js-cookie';
+	import Navigation from '$lib/components/Navigation.svelte';
+	import { removeNhostSessionCookie, setNhostSessionInCookie } from '$lib/nhost-auth-sveltekit';
+	import { onMount } from 'svelte';
+	import './styles.css';
 
 	export let data;
 	let { nhost } = data;
-	$: ({ nhost } = data);
-
-	nhost.auth.onAuthStateChanged((event, session) => {
-		if (session) {
-			setNhostSessionInCookie(session);
-		}
-
-		if (isBrowser()) {
-			invalidate('nhost:auth');
-		}
-	});
-
-	nhost.auth.onTokenChanged(() => {
-		setNhostSessionInCookie(nhost);
-		if (isBrowser()) {
-			invalidate('nhost:auth');
-		}
-	});
 
 	/**
 	 * @param {{ detail: { signout: any; }; }} event
 	 */
 	async function handleSignOut(event) {
 		await nhost.auth.signOut();
-		removeNhostSessionCookie();
 		await goto(`/`);
 	}
+
+	onMount(() => {
+		nhost.auth.onAuthStateChanged((_, session) => {
+			if (session) {
+				setNhostSessionInCookie(session);
+			} else {
+				removeNhostSessionCookie();
+			}
+
+			invalidate('nhost:auth');
+		});
+	});
 </script>
 
 <div class="app">

@@ -6,12 +6,8 @@ import type { NhostClient, NhostSession } from '@nhost/nhost-js';
 declare global {
 	namespace App {
 		// interface Error {}
-		interface Locals {
-			nhost: NhostClient;
-		}
-		interface PageData {
-			session: NhostSession | null;
-		}
+		interface Locals {}
+		interface PageData {}
 		// interface Platform {}
 	}
 }

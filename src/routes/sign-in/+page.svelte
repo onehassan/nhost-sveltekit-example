@@ -5,7 +5,6 @@
 
 	export let data;
 	let { nhost } = data;
-	$: ({ nhost } = data);
 
 	/** @type {string}*/
 	let email;
@@ -17,7 +16,7 @@
 	let error;
 
 	const handleSignIn = async () => {
-		const { error: signInError, session } = await nhost.auth.signIn({
+		const { error: signInError } = await nhost.auth.signIn({
 			email,
 			password
 		});
