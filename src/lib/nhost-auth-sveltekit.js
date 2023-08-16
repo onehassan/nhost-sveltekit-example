@@ -7,10 +7,8 @@ export const NHOST_SESSION_KEY = 'nhostSession';
 /** @type {import('@nhost/nhost-js').NhostClient | null} */
 let nhost;
 
-/** @param {import('@nhost/nhost-js').NhostClient | import('@nhost/nhost-js').NhostSession | null} param */
-export const setNhostSessionInCookie = (param) => {
-	const session = param && 'auth' in param ? param.auth.getSession() : param;
-
+/** @param {import('@nhost/nhost-js').NhostSession | null} session */
+export const setNhostSessionInCookie = (session) => {
 	if (!session) {
 		Cookies.remove(NHOST_SESSION_KEY);
 		return;
@@ -26,8 +24,6 @@ export const setNhostSessionInCookie = (param) => {
 		expires
 	});
 };
-
-export const removeNhostSessionCookie = () => Cookies.remove(NHOST_SESSION_KEY);
 
 /** @param {import('@sveltejs/kit').Cookies} cookies */
 export const getNhostSessionFromCookie = (cookies) => {
