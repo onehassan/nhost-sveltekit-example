@@ -1,13 +1,22 @@
 <script>
 	export let value = '';
+
+	/** @type {string} */
 	export let id;
+
+	/** @type {string} */
 	export let label;
+
 	export let type = 'text';
+
+	/** @type {string} */
 	export let name;
+
 	export let required = false;
 
 	export let inputRef = null;
 
+	/** @param {HTMLInputElement} node */
 	function setType(node) {
 		node.type = type;
 	}
@@ -25,7 +34,7 @@
 			{required}
 			bind:value
 			bind:this={inputRef}
-			class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md py-3 outline-none"
+			class="block w-full p-3 border rounded-md border-slate-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 		/>
 	</div>
 </div>

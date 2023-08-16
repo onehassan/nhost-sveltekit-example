@@ -33,6 +33,12 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"uuid": "^9.0.0"
+		"@apollo/client": "^3.8.1",
+		"@nhost/nhost-js": "^2.2.13",
+		"graphql": "^16.7.1",
+		"graphql-tag": "^2.12.6",
+		"js-cookie": "^3.0.5",
+		"uuid": "^9.0.0",
+		"xstate": "^4.38.2"
 	}
 }
