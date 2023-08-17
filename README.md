@@ -1,43 +1,55 @@
-# Nhost SvelteKit Example
+# Nhost with SvelteKit Example
 
-## Developing
+## Getting started
 
-Create a .env file and fill in with your nhost project's `region` and 'subdomain'
+1. Clone the repository
 
-```bash
-PUBLIC_NHOST_REGION=
-PUBLIC_NHOST_SUBDOMAIN=
-```
+   ```bash
+   git clone https://github.com/onehassan/nhost-sveltekit-example
+   cd nhost-sveltekit-example
+   ```
 
-## Running Locally
+2. Install dependencies
 
-```bash
-npm run dev
-```
+   ```bash
+   npm install
+   ```
 
-## Running Locally Using the Nhost CLI
+3. Create a .env file and fill in with your nhost project's `region` and `subdomain`.
 
-1. Create an nhost project using the CLI
+   ```bash
+   PUBLIC_NHOST_REGION=
+   PUBLIC_NHOST_SUBDOMAIN=
+   ```
 
-```bash
-$ nhost init
-```
+4. Start the development server
+   ```bash
+   npm run dev
+   ```
 
-2. Run the project
+## Running locally with the Nhost CLI
 
-```bash
-$ nhost up
-```
+1. Create new nhost project using the CLI
 
-2. Create a `.env` file and set `PUBLIC_NHOST_SUBDOMAIN` to `local` and leave the `PUBLIC_NHOST_REGION`empty
+   > Make sure you have the [Nhost CLI installed](https://docs.nhost.io/platform/cli).
 
-```bash
-PUBLIC_NHOST_REGION=local
-PUBLIC_NHOST_REGION=
-```
+   ```bash
+   nhost init
+   ```
 
-3. Start the sveltekit developement server
+2. set the `PUBLIC_NHOST_SUBDOMAIN` to `local` in the `.env` file
 
-```bash
-$ npm run dev
-```
+   ```bash
+   PUBLIC_NHOST_SUBDOMAIN=local
+   ```
+
+3. Terminal 1: Start Nhost
+
+   ```sh
+   nhost up
+   ```
+
+4. Terminal 2: Start the SvelteKit dev server
+   ```sh
+   npm run dev
+   ```
