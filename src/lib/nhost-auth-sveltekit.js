@@ -49,6 +49,10 @@ export const getNhostLoadClient = async (session) => {
 			setNhostSessionInCookie(session);
 			invalidate('nhost:auth');
 		});
+
+		nhost.auth.onTokenChanged((session) => {
+			setNhostSessionInCookie(session);
+		});
 	}
 
 	nhost.auth.client.start({ initialSession: session });
