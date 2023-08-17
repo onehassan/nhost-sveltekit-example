@@ -1,24 +1,19 @@
 <script>
 	export let data;
 	let { session, nhost } = data;
-
 	import { gql } from 'graphql-tag';
 
-	const GET_TODOS = gql`
-		query Todos {
-			todos {
-				id
-				text
-				done
-				createdAt
-				updatedAt
+	const getFiles = async () => {
+		const response = await nhost.graphql.request(gql`
+			{
+				files {
+					id
+					name
+				}
 			}
-		}
-	`;
+		`);
 
-	const getTodos = async () => {
-		const response = await nhost.graphql.request(GET_TODOS);
-		return response.data.todos;
+		return response.data.files;
 	};
 </script>
 
@@ -31,16 +26,16 @@
 	Hi! You are registered with email: {session?.user.email}.
 </h1>
 
-<h2>Todos</h2>
-{#await getTodos()}
+<h2>Files</h2>
+{#await getFiles()}
 	<p>Loading...</p>
-{:then todos}
-	<p>Showing {todos.length} posts.</p>
+{:then files}
+	<p>Showing {files.length} files</p>
 
 	<ul>
-		{#each todos as todo}
+		{#each files as file}
 			<li>
-				{todo.text}
+				{file.name}
 			</li>
 		{/each}
 	</ul>
