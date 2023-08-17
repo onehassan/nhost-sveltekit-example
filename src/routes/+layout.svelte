@@ -1,19 +1,10 @@
 <script>
-	import { goto, invalidate } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import Navigation from '$lib/components/Navigation.svelte';
-	import { setNhostSessionInCookie } from '$lib/nhost-auth-sveltekit';
-	import { onMount } from 'svelte';
 	import './styles.css';
 
 	export let data;
 	let { nhost } = data;
-
-	onMount(() => {
-		nhost.auth.onAuthStateChanged((_, session) => {
-			setNhostSessionInCookie(session);
-			invalidate('nhost:auth');
-		});
-	});
 
 	/**
 	 * @param {{ detail: { signout: any; }; }} event

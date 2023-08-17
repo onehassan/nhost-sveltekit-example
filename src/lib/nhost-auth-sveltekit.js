@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
 import { NhostClient, isBrowser } from '@nhost/nhost-js';
 import { PUBLIC_NHOST_REGION, PUBLIC_NHOST_SUBDOMAIN } from '$env/static/public';
+import { invalidate } from '$app/navigation';
 
 export const NHOST_SESSION_KEY = 'nhostSession';
 
@@ -42,6 +43,13 @@ export const getNhostLoadClient = async (session) => {
 		subdomain: PUBLIC_NHOST_SUBDOMAIN,
 		start: false
 	});
+
+	if (isBrowser()) {
+		nhost.auth.onAuthStateChanged((_, session) => {
+			setNhostSessionInCookie(session);
+			invalidate('nhost:auth');
+		});
+	}
 
 	nhost.auth.client.start({ initialSession: session });
 
